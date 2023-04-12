@@ -6,12 +6,32 @@
     <link rel="stylesheet" href="../css/sakura.css">
     
     <style>
+      .a1 {
+        text-decoration: none;
+     
+        text-align: right;
+        background-color: #afafaf;
+        color: black;
+        border-color: black;
+        border-radius: 3px;
+        padding: 4.5px;
+      }
+      </style>
+  
+  <nav>
+    <a class="a1" href="../index.html">Home</a>
+    <a class="a1" href="./info.html">Game</a>
+    <a class="a1" href="./about.html">About</a>
+    <a class="a1" href="./reviews.html">Reviews</a>
+  </nav>
+
+    <style>
       /* Add styles for the review cards */
       .review-card {
         border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
+        border-radius: 25px;
+        padding: 25px;
+        margin-bottom: 25px;
       }
       .review-card h2 {
         margin-top: 0;
@@ -29,7 +49,7 @@
     <script src="data.js"></script>
   </head>
   <body>
-    <h1>Game Reviews</h1>
+    <h1 style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Game Reviews</h1>
     <div id="reviews-container">
       <!-- The review cards will be generated here dynamically -->
     </div>
@@ -139,5 +159,25 @@ addReviewForm.addEventListener("submit", event => {
 });
 
 </script>
+
+<p> Ansh Parmar --
+  rating: 4,
+  review: This game is so fun and addictive! I love the gameplay.</p>
+
+  <p> Om Patel --
+    rating: 5
+    review: Wow, just wow! This game blew me away. it is top-notch.</p>
+
+    <p> Kirtan Patel --
+      rating: 3
+      review: This game is good, but not great.</p>
+
+      <p> Yakshit Aggarawal --
+        rating: 5
+        review: I can't stop playing this game! It's so well-designed and has endless replay value.</p>
+
+        <p> Pratham Gandhi --
+          rating: 4
+          review: Awesome. No words!!!</p>
 </body>
 </html>
