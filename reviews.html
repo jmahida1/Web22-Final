@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Game Reviews</title>
+    <link rel="stylesheet" href="../css/sakura.css">
+    
+    <style>
+      /* Add styles for the review cards */
+      .review-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .review-card h2 {
+        margin-top: 0;
+        font-size: 18px;
+      }
+      .review-card p {
+        margin-bottom: 0;
+        font-size: 14px;
+      }
+      .review-card .rating {
+        font-size: 24px;
+        color: #FFD700;
+      }
+    </style>
+    <script src="data.js"></script>
+  </head>
+  <body>
+    <h1>Game Reviews</h1>
+    <div id="reviews-container">
+      <!-- The review cards will be generated here dynamically -->
+    </div>
+
+    <script src="data.js"></script>
+
+    <h2>Add Your Review</h2>
+    <form id="add-review-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required><br>
+      <label for="rating">Rating:</label>
+      <select id="rating" name="rating" required>
+        <option value="">Select a rating...</option>
+        <option value="1">★</option>
+        <option value="2">★ ★</option>
+        <option value="3">★ ★ ★</option>
+        <option value="4">★ ★ ★ ★</option>
+        <option value="5">★ ★ ★ ★ ★</option>
+      </select><br>
+      <label for="review">Review:</label>
+      <textarea id="review" name="review" required></textarea><br>
+      <button type="submit">Create</button>
+    </form>
+    <script>
+      // Get the review data from data.js
+      const reviewData = window
+
+
+        // Get the reviews container
+  const reviewsContainer = document.getElementById("reviews-container");
+
+// Function to generate a review card
+function generateReviewCard(review) {
+  // Create the elements
+  const card = document.createElement("div");
+  const title = document.createElement("h2");
+  const date = document.createElement("p");
+  const rating = document.createElement("p");
+  const reviewText = document.createElement("p");
+
+  // Add the classes and text content
+  card.classList.add("review-card");
+  title.textContent = review.name;
+  date.textContent = review.date;
+  rating.textContent = "Rating: ";
+  for (let i = 0; i < review.rating; i++) {
+    const star = document.createElement("span");
+    star.classList.add("rating");
+    star.textContent = "★";
+    rating.appendChild(star);
+  }
+  for (let i = review.rating; i < 5; i++) {
+    const star = document.createElement("span");
+    star.classList.add("rating");
+    star.textContent = "☆";
+    rating.appendChild(star);
+  }
+  reviewText.textContent = review.review;
+
+  // Add the elements to the card
+  card.appendChild(title);
+  card.appendChild(date);
+  card.appendChild(rating);
+  card.appendChild(reviewText);
+
+  // Add the card to the reviews container
+  reviewsContainer.appendChild(card);
+}
+
+// Function to clear the reviews container
+function clearReviews() {
+  while (reviewsContainer.firstChild) {
+    reviewsContainer.removeChild(reviewsContainer.firstChild);
+  }
+}
+
+// Function to generate all the review cards
+function generateAllReviewCards() {
+  clearReviews();
+  reviewData.forEach(review => {
+    generateReviewCard(review);
+  });
+}
+
+// Call the function to generate the initial review cards
+generateAllReviewCards();
+
+// Get the form and add an event listener for submit
+const addReviewForm = document.getElementById("add-review-form");
+addReviewForm.addEventListener("submit", event => {
+  event.preventDefault();
+  // Get the form data and create a new review object
+  const formData = new FormData(addReviewForm);
+  const newReview = {
+    name: formData.get("name"),
+    date: formData.get("date"),
+    rating: parseInt(formData.get("rating")),
+    review: formData.get("review")
+  };
+  // Add the new review to the reviewData array
+  reviewData.push(newReview);
+  // Clear the form and regenerate all the review cards
+  addReviewForm.reset();
+  generateAllReviewCards();
+});
+
+</script>
+</body>
+</html>
